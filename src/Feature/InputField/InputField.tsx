@@ -6,7 +6,7 @@ const InputField: React.FC<InputFieldProps> = ({
                                                    placeholder,
                                                    value,
                                                    onChange,
-                                                 save,
+                                                 save, onBlur, autoFocus
                                                }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         onChange(e.target.value);
@@ -17,17 +17,21 @@ const InputField: React.FC<InputFieldProps> = ({
             event.preventDefault();
             if (save) {
                 save();
+            } else if (onBlur) {
+                onBlur()
             }
         }
     };
 
     return (
         <input
+            onBlur={onBlur}
             type={"text"}
             placeholder={placeholder}
             value={value}
             onChange={handleChange}
             onKeyDown={handleKeyPress}
+            autoFocus={autoFocus}
         />
     );
 };

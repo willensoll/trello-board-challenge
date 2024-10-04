@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "../Column/Column.css";
 import InputField from "../../Feature/InputField/InputField";
-import Button from "../../Feature/Button/Button";
+import {Button} from "../../Feature/Button/Button";
 import {v4 as uuidGen} from "uuid";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
 import {AddCardProps} from "./Types";

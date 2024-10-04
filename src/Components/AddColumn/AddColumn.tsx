@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
 import {v4 as uuidGen} from "uuid";
 import InputField from "../../Feature/InputField/InputField";
-import Button from "../../Feature/Button/Button";
+import {Button} from "../../Feature/Button/Button";
 
 
 const newColumnStyle: React.CSSProperties = {

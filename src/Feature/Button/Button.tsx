@@ -10,12 +10,11 @@ const buttonStyle: React.CSSProperties = {
     marginTop: "10px"
 }
 
-const Button: React.FC<ButtonProps> = ({onClick, isDisabled, buttonText}) => {
+export const Button: React.FC<ButtonProps> = ({onClick, isDisabled, buttonText, style}) => {
     return (
-        <button style={buttonStyle} onClick={onClick} disabled={isDisabled}>
+        <button style={style? {...buttonStyle,...style} : buttonStyle} onClick={onClick} disabled={isDisabled}>
             {buttonText ? buttonText : "Confirm"}
         </button>
     );
 };
 
-export default Button;
