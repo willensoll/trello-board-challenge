@@ -1,5 +1,6 @@
 import React, {ReactNode} from "react"
 import {Column} from "../../Components/Column/Types";
+import {Card} from "../../Components/Card/Types";
 
 export interface BoardContextProps {
     children: ReactNode;
@@ -17,10 +18,3 @@ export interface BoardContextType {
     setState: React.Dispatch<React.SetStateAction<BoardState>>;
 }
 
-
-export type Card = {
-    id: string,
-    columnGroup: string,
-    title: string,
-    description?: string
-}

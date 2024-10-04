@@ -1,4 +1,4 @@
-import {Card} from "../../Context/BoardContext/Types";
+import {Card} from "../Card/Types";
 
 export type Column = {
     id: string

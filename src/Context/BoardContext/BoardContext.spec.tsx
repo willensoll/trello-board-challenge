@@ -45,7 +45,10 @@ describe("BoardContext", () => {
                 <TestComponent/>
             </BoardProvider>
         )
-        const defaultState = {Board: {Columns: [], Cards: []}};
+        const defaultState = {Board: {
+                Columns: [{ id: '1', title: 'Column 1' }, { id: '2', title: 'Column 2' }],
+                Cards: [{id: "1", columnGroup: "1", title: "A Card"}],
+            }};
         expect(screen.getByTestId('state').textContent).toBe(JSON.stringify(defaultState));
 
     })
@@ -92,6 +95,4 @@ describe("BoardContext", () => {
         };
         expect(screen.getByTestId('state').textContent).toBe(JSON.stringify(updatedState));
     })
-
-
 })
