@@ -20,6 +20,7 @@ const cardContentStyle: React.CSSProperties = {
     flex: "1 0 auto",
     display: "flex",
     flexDirection: "column",
+    alignItems: "center"
 }
 
 const titleStyle: React.CSSProperties = {

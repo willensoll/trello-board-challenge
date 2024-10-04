@@ -11,7 +11,7 @@ export const BoardProvider = ({children}: BoardContextProps) => {
         return storedState ? JSON.parse(storedState) : {
             Board: {
                 Columns: [{ id: '1', title: 'Column 1' }, { id: '2', title: 'Column 2' }],
-                Cards: [{id: "1", columnGroup: "1", title: "A Card"}],
+                Cards: [{id: "1", columnGroup: "1", title: "A Card", description: "A description"}],
             }
         };
     });

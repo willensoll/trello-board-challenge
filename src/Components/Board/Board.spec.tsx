@@ -15,6 +15,21 @@ jest.mock("../Header/Header", () => ({
     }
 }))
 
+jest.mock("../AddColumn/AddColumn", () => ({
+    AddColumn: () => {
+        return <h1>Add Column</h1>;
+    }
+}));
+
+const contextWrapper = ({children}: {children : React.ReactNode}) => {
+    return (
+        <BoardProvider>
+            {children}
+        </BoardProvider>
+    )
+}
+
+
 describe("Board", () => {
     const initialState: BoardState = {
         Board: {
@@ -24,18 +39,26 @@ describe("Board", () => {
     };
 
     it('should render header', () => {
-        render(<BoardProvider><Board /></BoardProvider>);
+        render(<Board />, {wrapper: contextWrapper});
         expect(screen.getByRole("heading", { name: "Mock Trello Board!" })).toBeVisible();
     });
 
     it('should render the correct number of columns', () => {
         window.localStorage.setItem('boardState', JSON.stringify(initialState));
 
-        render(<BoardProvider><Board /></BoardProvider>);
+        render(<Board />, {wrapper: contextWrapper});
 
         const columns = screen.getAllByTestId(/column-/);
 
         expect(columns.length).toBe(initialState.Board.Columns.length);
+    });
+
+    it('should render addColumn', () => {
+        window.localStorage.setItem('appState', JSON.stringify(initialState));
+
+        render(<Board />, {wrapper: contextWrapper});
+
+        expect(screen.getByRole("heading", { name: "Add Column" })).toBeVisible();
     });
 
 });

@@ -1,6 +1,7 @@
 import {Header} from "../Header/Header";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
 import {Column} from "../Column/Column";
+import {AddColumn} from "../AddColumn/AddColumn";
 
 const boardStyle: React.CSSProperties = {
     display: "grid",
@@ -23,6 +24,7 @@ export const Board = () => {
                     return (<Column key={column.id} cards={state.Board.Cards} title={column.title} id={column.id}
                     />)
                 })}
+                <AddColumn/>
             </>
         </div>
     )
