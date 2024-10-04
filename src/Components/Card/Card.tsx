@@ -1,9 +1,10 @@
-import { Card as CardProps } from "./Types";
+import {Card as CardProps} from "./Types";
 import moment from "moment";
-import React, { useState } from "react";
-import { Modal } from "../../Feature/Modal/Modal";
-import { Button } from "../../Feature/Button/Button";
-import { EditCard } from "../EditCard/EditCard";
+import React, {useState} from "react";
+import {Modal} from "../../Feature/Modal/Modal";
+import {Button} from "../../Feature/Button/Button";
+import {EditCard} from "../EditCard/EditCard";
+import {useDragDrop} from "../../Context/DragDropContext/DragDropContext";
 
 const cardStyle: React.CSSProperties = {
     backgroundColor: "#979b98",
@@ -53,20 +54,29 @@ export const Card: React.FC<CardProps> = (card) => {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+
+    const {startDrag} = useDragDrop();
+
+    const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+        e.dataTransfer.setData('text/plain', card.id);
+        startDrag(card.id);
+    };
+
+
     return (
         <>
-            <div className="card" style={cardStyle} data-testid={"card"}>
+            <div className="card" style={cardStyle} data-testid={"card"} draggable onDragStart={handleDragStart}>
                 <div style={cardContentStyle}>
                     <h3 style={titleStyle}>{card.title}</h3>
                     <p style={descriptionStyle}>{card.description}</p>
                 </div>
-                <Button buttonText={"Edit"} onClick={openModal} />
+                <Button buttonText={"Edit"} onClick={openModal}/>
                 <div style={footerStyle}>
                     <span>{moment().format("L")}</span>
                 </div>
             </div>
             <Modal onClose={closeModal} isOpen={isModalOpen}>
-                <EditCard cardInEdit={card} onClose={closeModal} />
+                <EditCard cardInEdit={card} onClose={closeModal}/>
             </Modal>
         </>
     );

@@ -3,6 +3,7 @@ import{Board} from './Board'
 import {render, screen} from "@testing-library/react";
 import {BoardProvider} from "../../Context/BoardContext/BoardContext";
 import {BoardState} from "../../Context/BoardContext/Types";
+import {DragDropProvider} from "../../Context/DragDropContext/DragDropContext";
 
 
 beforeEach(() => {
@@ -24,7 +25,9 @@ jest.mock("../AddColumn/AddColumn", () => ({
 const contextWrapper = ({children}: {children : React.ReactNode}) => {
     return (
         <BoardProvider>
+            <DragDropProvider>
             {children}
+            </DragDropProvider>
         </BoardProvider>
     )
 }

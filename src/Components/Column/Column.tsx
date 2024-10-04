@@ -1,6 +1,7 @@
 import {Column as ColumnProps} from "./Types"
 import {Card} from "../Card/Card";
 import {AddCard} from "../AddCard/AddCard";
+import {useDragDrop} from "../../Context/DragDropContext/DragDropContext";
 
 const columnStyle: React.CSSProperties = {
     gridRow: "2",
@@ -25,12 +26,27 @@ const contentStyle: React.CSSProperties = {
 
 
 
-export const Column: React.FC<ColumnProps> = ({title, cards, id}) => {
+export const Column: React.FC<ColumnProps> = ({title, cards, id, onDrop}) => {
+    const {endDrag} = useDragDrop();
+
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault();
+
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>): void => {
+        e.preventDefault();
+        const droppedItemId = e.dataTransfer.getData('text/plain');
+        if (onDrop) {
+            onDrop(droppedItemId);
+        }
+        endDrag();
+    };
+
     return (
         <div
             style={columnStyle}
             data-testid={`column-${title}`}
             className={"column"}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
         >
             <div style={contentStyle}>
                 <h1>{title}</h1>
