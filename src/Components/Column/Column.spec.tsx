@@ -1,10 +1,16 @@
 import {Column} from "./Column";
 import {render, screen} from "@testing-library/react";
+import React from "react";
 
 
 jest.mock("../Card/Card", () => ({
     Card: () => <div>A test card</div>
 }))
+
+jest.mock("../AddCard/AddCard", () => ({
+    AddCard: () => <h1>Add card mock</h1>
+}))
+
 
 describe("Column", () => {
     const columnProps = {
@@ -42,4 +48,11 @@ describe("Column", () => {
         const cards = screen.queryAllByText('A test card')
         expect(cards).toHaveLength(1);
     })
+
+    it('should render newCard', () => {
+
+        render(<Column {...columnProps}/>);
+
+        expect(screen.getByRole("heading", { name: "Add card mock" })).toBeVisible();
+    });
 })

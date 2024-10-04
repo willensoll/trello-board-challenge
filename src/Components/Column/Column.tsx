@@ -1,5 +1,6 @@
 import {Column as ColumnProps} from "./Types"
 import {Card} from "../Card/Card";
+import {AddCard} from "../AddCard/AddCard";
 
 const columnStyle: React.CSSProperties = {
     gridRow: "2",
@@ -36,8 +37,8 @@ export const Column: React.FC<ColumnProps> = ({title, cards, id}) => {
                 {cards && cards.map((card) => {
                     return id === card.columnGroup && (<Card key={card.id} {...card}/>)
                 })}
+            <AddCard columnId={id} />
             </div>
-
         </div>
     )
 }

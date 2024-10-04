@@ -1,0 +1,18 @@
+.new-card {
+    opacity: 0;
+}
+.column:hover .new-card {
+    visibility: visible;
+    opacity: 1;
+    transition:
+            opacity 1.5s,
+            visibility 1s;
+}
+
+.column .new-card:focus-within {
+    visibility: visible;
+    opacity: 1;
+    transition:
+            opacity 1.5s,
+            visibility 1s;
+}
