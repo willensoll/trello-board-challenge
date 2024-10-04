@@ -5,11 +5,19 @@ import {EditCardProps} from "./Types";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
 import {useDelete} from "../../Hooks/UseDelete/useDelete";
 
+
+const editCardContainer: React.CSSProperties = {
+    display: "flex", flexDirection: "column", height: "100%"
+}
+
 const buttonContainer: React.CSSProperties = {
     display: "flex",
     justifyContent: "space-between",
+}
+
+const promptContainer: React.CSSProperties = {
+
     marginTop: "auto",
-    paddingTop: "20px",
 }
 
 const saveButtonStyle: React.CSSProperties = {
@@ -27,7 +35,6 @@ const deleteButtonStyle: React.CSSProperties = {
     backgroundColor: "#cbaa99",
     color: "black",
 }
-
 
 
 export const EditCard: React.FC<EditCardProps> = ({cardInEdit, onClose}) => {
@@ -53,11 +60,11 @@ export const EditCard: React.FC<EditCardProps> = ({cardInEdit, onClose}) => {
     return (
         <>
             <h1>Title:</h1>
-            <div>
+            <div style={editCardContainer}>
                 <TextToInput text={title} onChange={setTitle}/>
                 <h2>Description</h2>
                 <TextToInput text={description || ""} onChange={setDescription}/>
-                <p>Click the text to edit</p>
+                <div style={promptContainer}><p><strong>Click the ticket information to edit</strong></p></div>
                 <div style={buttonContainer}>
                     <Button onClick={() => saveCard()} buttonText={"Save"} style={saveButtonStyle}/>
                     <Button onClick={onClose} buttonText={"Close"} style={closeButtonStyle}/>

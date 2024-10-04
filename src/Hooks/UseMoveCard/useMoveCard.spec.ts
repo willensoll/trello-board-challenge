@@ -1,6 +1,6 @@
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
 import {renderHook} from "@testing-library/react";
-import {useMoveCard} from "./useMoveCard";
+import {useMoveCard} from './useMoveCard';
 import {act} from "react";
 
 jest.mock('../../context/BoardContext/BoardContext', () => ({

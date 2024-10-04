@@ -6,9 +6,10 @@ const InputField: React.FC<InputFieldProps> = ({
                                                    placeholder,
                                                    value,
                                                    onChange,
-                                                 save, onBlur, autoFocus
+                                                 save, onBlur, autoFocus, setIsEditing
                                                }) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (setIsEditing) setIsEditing(true);
         onChange(e.target.value);
     };
 
