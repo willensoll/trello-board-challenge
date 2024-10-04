@@ -1,10 +1,47 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Core App functionality (Challenge requirements)
+- A user can add and label columns.
+- A user can  add and edit cards.
+- A user can  move cards between columns.
+- A users board is persisted in Localstorage
+- Do make sure the available interactions are intuitive. In other words, we will be considering usability.
+- Persistence in LocalStorage
+
+## Additional Implemented Functionality
+
+- Delete card / column.
+- Drag and drop cards
+- Dockerized the solution (see below for instructions)
+  - Accessibility / quality of life
+    - Colors WCAG 2.1 AA based on a contrast ratio of 4.5:1, 
+    - Enter keypress on inputs to save where applicable
+    - Able to navigate and interact with board using just the keyboard
+    - Click outside to close modal
+
+## Given more time...
+
+- Codebase
+  - Structure CSS better, variables, inheritance. (I was not clear on whether or not i was allowed to use a library like emotion so opted for bare bones CSS-IN-JS. On reflection, not sure what it's proved.) 
+  - Evaluate if i can Enhance Types / interfaces
+  - Evaluate if i can enhance unit tests 
+  - Optimise for Screenreader
+- Features I hoped to implement
+  - Set card / column order with drag & drop - (drag and drop is set up, needs to be implemented at a column level)
+  - Enrich cards with more data / editable options (tags, assigned user, etc)
+  - Mobile view??! 
+  
+
+# Running the solution
+
+# Node
 
 In the project directory, you can run:
+
+
+### `npm i`
+
+To install dependencies if neccesary 
 
 ### `npm start`
 
@@ -29,18 +66,21 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Docker
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run the application using Docker:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Build the docker image
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### ```docker build -t trello-board .```
 
-## Learn More
+2. Run the docker container
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### ```docker run -p 80:80 trello-board```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application will be available at http://localhost.
+
+
+
+
