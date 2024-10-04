@@ -3,18 +3,25 @@ import {fireEvent, render, screen} from "@testing-library/react";
 import {EditCard} from "./EditCard";
 import {Card} from "../Card/Types";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
+import {useDelete} from "../../Hooks/UseDelete/useDelete";
 
 jest.mock('../../Context/BoardContext/BoardContext', () => ({
     useBoardContext: jest.fn(),
 }));
 
+jest.mock('../../Hooks/UseDelete/useDelete', () => ({
+    useDelete: jest.fn()
+}))
+
 const mockSetState = jest.fn();
+const mockDeleteCard = jest.fn()
 
 describe('EditCard', () => {
     const cardInEdit: Card = {id: '1', title: 'Test Card', description: 'Test Description', columnGroup: "1"};
 
     beforeEach(() => {
         (useBoardContext as jest.Mock).mockReturnValue({setState: mockSetState});
+        (useDelete as jest.Mock).mockReturnValue({deleteCard: mockDeleteCard})
     });
 
     it('should update title and description fields', () => {
@@ -76,5 +83,14 @@ describe('EditCard', () => {
         expect(newState.Board.Cards).toEqual([{ id: "1", title: "New Title", description: "New Description", columnGroup: '1' },  { id: '2', title: 'Another Card', description: 'Another Description', columnGroup: "1" }]);
 
         expect(handleClose).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call deleteCard when Delete button is clicked', () => {
+        const handleClose = jest.fn();
+        render(<EditCard onClose={handleClose} cardInEdit={cardInEdit}/>);
+
+        fireEvent.click(screen.getByText('Delete card'));
+
+        expect(mockDeleteCard).toHaveBeenCalledWith(cardInEdit.id);
     });
 })

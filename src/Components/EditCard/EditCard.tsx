@@ -3,6 +3,7 @@ import {TextToInput} from "../../Feature/TextToInput/TextToInput";
 import {Button} from "../../Feature/Button/Button";
 import {EditCardProps} from "./Types";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
+import {useDelete} from "../../Hooks/UseDelete/useDelete";
 
 const buttonContainer: React.CSSProperties = {
     display: "flex",
@@ -22,8 +23,17 @@ const closeButtonStyle: React.CSSProperties = {
 }
 
 
+const deleteButtonStyle: React.CSSProperties = {
+    backgroundColor: "#cbaa99",
+    color: "black",
+}
+
+
+
 export const EditCard: React.FC<EditCardProps> = ({cardInEdit, onClose}) => {
     const {setState} = useBoardContext()
+    const {deleteCard} = useDelete()
+
 
     const [title, setTitle] = useState(cardInEdit.title);
     const [description, setDescription] = useState(cardInEdit.description);
@@ -51,6 +61,8 @@ export const EditCard: React.FC<EditCardProps> = ({cardInEdit, onClose}) => {
                 <div style={buttonContainer}>
                     <Button onClick={() => saveCard()} buttonText={"Save"} style={saveButtonStyle}/>
                     <Button onClick={onClose} buttonText={"Close"} style={closeButtonStyle}/>
+                    <Button onClick={() => deleteCard(cardInEdit.id)} buttonText={"Delete card"}
+                            style={deleteButtonStyle}/>
                 </div>
             </div>
         </>

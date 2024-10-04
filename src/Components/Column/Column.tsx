@@ -2,6 +2,8 @@ import {Column as ColumnProps} from "./Types"
 import {Card} from "../Card/Card";
 import {AddCard} from "../AddCard/AddCard";
 import {useDragDrop} from "../../Context/DragDropContext/DragDropContext";
+import {useDelete} from "../../Hooks/UseDelete/useDelete";
+import {Button} from "../../Feature/Button/Button";
 
 const columnStyle: React.CSSProperties = {
     gridRow: "2",
@@ -24,10 +26,19 @@ const contentStyle: React.CSSProperties = {
     overflowY: "auto",
 }
 
+const deleteButtonStyle: React.CSSProperties = {
+    backgroundColor: "#cbaa99",
+    color: "black",
+    width: "60%",
+    marginTop: "auto",
+    marginBottom: "10px"
+}
+
 
 
 export const Column: React.FC<ColumnProps> = ({title, cards, id, onDrop}) => {
     const {endDrag} = useDragDrop();
+    const { deleteColumn } = useDelete();
 
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => e.preventDefault();
 
@@ -55,6 +66,12 @@ export const Column: React.FC<ColumnProps> = ({title, cards, id, onDrop}) => {
                 })}
             <AddCard columnId={id} />
             </div>
+            <Button
+                style={deleteButtonStyle}
+                isDisabled={false}
+                onClick={() => deleteColumn(id)}
+                buttonText={"Delete Column"}
+            />
         </div>
     )
 }

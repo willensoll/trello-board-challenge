@@ -2,7 +2,7 @@ import {Header} from "../Header/Header";
 import {useBoardContext} from "../../Context/BoardContext/BoardContext";
 import {Column} from "../Column/Column";
 import {AddColumn} from "../AddColumn/AddColumn";
-import {useMoveCard} from "../../Hooks/useMoveCard/useMoveCard";
+import {useMoveCard} from "../../Hooks/UseMoveCard/useMoveCard";
 
 const boardStyle: React.CSSProperties = {
     display: "grid",

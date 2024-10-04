@@ -2,12 +2,17 @@ import {Column} from "./Column";
 import {fireEvent, render, screen} from "@testing-library/react";
 import React from "react";
 import {useDragDrop} from "../../Context/DragDropContext/DragDropContext";
+import {useDelete} from "../../Hooks/UseDelete/useDelete";
 
 
 jest.mock('../../Context/DragDropContext/DragDropContext', () => ({
     useDragDrop: jest.fn(),
     DragDropProvider: jest.fn()
 
+}))
+
+jest.mock('../../Hooks/UseDelete/useDelete', () => ({
+    useDelete: jest.fn()
 }))
 
 jest.mock("../Card/Card", () => ({
@@ -20,6 +25,8 @@ jest.mock("../AddCard/AddCard", () => ({
 
 describe("Column", () => {
     const mockEndDrag = jest.fn();
+    const mockDeleteColumn = jest.fn();
+
 
     const columnProps = {
         title: 'Test Column',
@@ -31,6 +38,8 @@ describe("Column", () => {
 
     beforeEach(() => {
         (useDragDrop as jest.Mock).mockReturnValue({endDrag: mockEndDrag});
+        (useDelete as jest.Mock).mockReturnValue({deleteColumn: mockDeleteColumn});
+
 
     })
 
@@ -127,5 +136,15 @@ describe("Column", () => {
         expect(columnProps.onDrop).toHaveBeenCalledWith('1');
 
         expect(mockEndDrag).toHaveBeenCalled();
+    });
+
+    it('should call deleteColumn when delete button is clicked', () => {
+        render(<Column {...columnProps} />);
+
+        const deleteButton = screen.getByRole('button', {name: /delete column/i});
+
+        fireEvent.click(deleteButton);
+
+        expect(mockDeleteColumn).toHaveBeenCalledWith(columnProps.id);
     });
 })
