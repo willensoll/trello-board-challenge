@@ -19,6 +19,10 @@
     - Able to navigate and interact with board using just the keyboard
     - Click outside to close modal
 
+##Constraints
+- 4 Hours
+- No react libs
+
 ## Given more time...
 
 - Codebase
